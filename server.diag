@@ -1,0 +1,40 @@
+blockdiag {
+   default_style = folded;  // Apply folded style to all edges
+   node_width = 170;  // Increase width for longer labels
+   node_height = 50;  // Adjust height for multiline labels
+   // Set labels to nodes.
+
+   internet [label = "Internet"];
+   wireguard [label = "Wireguard Tunnel"];
+   website [label = "Static website"];
+   goatcounter [label = "GoatCounter (Analytics)"];
+   home [label = "Home Server (debian)"];
+   VPS [label = "Cloud VPS (debian)"];
+   nginx [label = "NginX"];
+   email [label = "E-mail Server"];
+   dns [label = "coreDNS"];
+   cgit [label = "cgit (Git web frontend)"];
+   azerothcore [label = "AzerothCore (Game server)"];
+   minetest [label = "Minetest (Game server)"];
+   VNC [label = "VNC (Remote desktop server)"];
+   git [label = "git"];
+   incus [label = "Incus (Containerization system)"];
+
+   // Set labels to edges.
+
+   internet <-> VPS;
+   home <-> incus;
+   incus -> nginx;
+   incus -> email;
+   incus -> dns;
+   nginx -> website;
+   nginx <-> goatcounter;
+   nginx -> cgit;
+   incus -> git;
+   git -> cgit;
+   incus -> azerothcore;
+   incus -> minetest;
+   home <-> VNC;
+   VPS <-> wireguard;
+   wireguard <-> home;
+}
